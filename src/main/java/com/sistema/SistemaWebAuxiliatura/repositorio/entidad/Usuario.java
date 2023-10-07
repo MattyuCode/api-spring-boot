@@ -15,9 +15,9 @@ public class Usuario {
     private String nombreApellido;
     private String nombreUsuario;
     private String contrasenia;
-    private Integer idRol;
+    private Long idRol;
 
-    public Usuario(Long idUsuario, String nombreApellido, String nombreUsuario, String contrasenia, Integer idRol) {
+    public Usuario(Long idUsuario, String nombreApellido, String nombreUsuario, String contrasenia, Long idRol) {
         this.idUsuario = idUsuario;
         this.nombreApellido = nombreApellido;
         this.nombreUsuario = nombreUsuario;
@@ -25,7 +25,7 @@ public class Usuario {
         this.idRol = idRol;
     }
 
-    public Usuario(String nombreApellido, String nombreUsuario, String contrasenia, Integer idRol) {
+    public Usuario(String nombreApellido, String nombreUsuario, String contrasenia, Long idRol) {
 
         this.nombreApellido = nombreApellido;
         this.nombreUsuario = nombreUsuario;
@@ -70,11 +70,11 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Integer getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Integer idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 

@@ -5,8 +5,6 @@ import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
 import java.util.List;
 public interface UsuarioServicio{
 
-
-
     List<Usuario> listarTodosLosUsuarios();
 
     List<Usuario> findBynombreUsuarioAndContrasenia(String nombreUsuario, String contrasenia);
