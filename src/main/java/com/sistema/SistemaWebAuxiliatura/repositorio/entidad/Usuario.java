@@ -1,21 +1,29 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.PropertyValues;
 
+import java.util.Set;
+
+@Data
 @Entity
-
+@Table(name = "usuario")
 public class Usuario {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
     private String nombreApellido;
     private String nombreUsuario;
     private String contrasenia;
     private Long idRol;
+
+    public Usuario() {
+    }
 
     public Usuario(Long idUsuario, String nombreApellido, String nombreUsuario, String contrasenia, Long idRol) {
         this.idUsuario = idUsuario;
@@ -24,19 +32,6 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.idRol = idRol;
     }
-
-    public Usuario(String nombreApellido, String nombreUsuario, String contrasenia, Long idRol) {
-
-        this.nombreApellido = nombreApellido;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasenia = contrasenia;
-        this.idRol = idRol;
-    }
-
-    public Usuario() {
-
-    }
-
 
     public Long getIdUsuario() {
         return idUsuario;

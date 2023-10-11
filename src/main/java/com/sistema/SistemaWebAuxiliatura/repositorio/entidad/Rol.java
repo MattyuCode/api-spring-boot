@@ -1,20 +1,20 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name = "rol")
 public class Rol {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Long idRol;
-     private String nombreRol;
-      public Rol(){
+    private Long idRol;
+    private String nombreRol;
+    public Rol(){
 
-      }
+    }
 
     public Rol(Long idRol, String nombreRol) {
         this.idRol = idRol;
@@ -40,4 +40,6 @@ public class Rol {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
+
+
 }

@@ -51,10 +51,6 @@ public class Pago {
         this.fechaModificado = fechaModificado;
     }
 
-    public Pago() {
-
-    }
-
 
     public Long getIdPago() {
         return idPago;

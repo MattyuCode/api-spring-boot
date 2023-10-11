@@ -4,11 +4,10 @@ import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
 import com.sistema.SistemaWebAuxiliatura.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
@@ -16,8 +15,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private UsuarioRepositorio repositorio;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+   /* @Autowired
+    private PasswordEncoder passwordEncoder;*/
 
 
     @Override
@@ -30,12 +29,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return repositorio.findBynombreUsuarioAndContrasenia(nombreUsuario, contrasenia);
     }
 
+    @Override
+    public Optional<Usuario> findBynombreUsuario(String nombreUsuario) {
+
+        return repositorio.findBynombreUsuario(nombreUsuario);
+    }
+
 
     @Override
     public Usuario CrearUsuario(Usuario usuario) {
        /* BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();  */
-        String encriptado = passwordEncoder.encode(usuario.getContrasenia());
-        usuario.setContrasenia(encriptado);
+       /* String encriptado = passwordEncoder.encode(usuario.getContrasenia());
+        usuario.setContrasenia(encriptado);*/
 
 
 
