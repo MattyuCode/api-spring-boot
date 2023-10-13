@@ -19,18 +19,11 @@ public class Usuario {
     private Long idUsuario;
     private String nombreApellido;
     private String nombreUsuario;
+    private String email;
     private String contrasenia;
     private Long idRol;
 
     public Usuario() {
-    }
-
-    public Usuario(Long idUsuario, String nombreApellido, String nombreUsuario, String contrasenia, Long idRol) {
-        this.idUsuario = idUsuario;
-        this.nombreApellido = nombreApellido;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasenia = contrasenia;
-        this.idRol = idRol;
     }
 
     public Long getIdUsuario() {
@@ -57,6 +50,14 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getContrasenia() {
         return contrasenia;
     }
@@ -72,6 +73,4 @@ public class Usuario {
     public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
-
-
 }

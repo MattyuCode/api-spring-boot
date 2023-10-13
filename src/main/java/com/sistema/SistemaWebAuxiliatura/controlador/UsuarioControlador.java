@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("CRUDUSUARIO")
+@RequestMapping("/api/CRUDUSUARIO")
 public class UsuarioControlador {
 //@Autowired
 //private UsuarioServicio usuarioServicioImpl;
@@ -53,8 +53,6 @@ public ResponseEntity<?> ConsultarUsuario(){
         Usuario BuscarUsuarioById = this.usuarioServicio.BuscarUsuario(idUsuario);
         return ResponseEntity.ok(BuscarUsuarioById);
     }
-
-
 
     @GetMapping("/NombreContrasenia/{usuario}/{contrasenia}")
     public ResponseEntity<?> buscarUsuarioPorNombreYContrasenia(

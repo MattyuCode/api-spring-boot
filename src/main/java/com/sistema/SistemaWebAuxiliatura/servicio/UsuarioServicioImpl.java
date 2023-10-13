@@ -31,8 +31,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public Optional<Usuario> findBynombreUsuario(String nombreUsuario) {
-
-        return repositorio.findBynombreUsuario(nombreUsuario);
+        return Optional.empty();
     }
 
 

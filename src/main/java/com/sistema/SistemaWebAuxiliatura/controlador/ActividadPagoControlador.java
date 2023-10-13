@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("CRUDACTIVIDAD")
+@RequestMapping("/api/CRUDACTIVIDAD")
 public class ActividadPagoControlador {
     @Autowired
     private ActividadPagoServicio servicio;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("CRUD")
+@RequestMapping("/api/CRUD")
 public class RolControlador {
     @Autowired
     private RolServicioImpl rolServicioImpl;
