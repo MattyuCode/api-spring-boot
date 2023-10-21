@@ -27,7 +27,7 @@ public class AsistenciaControlador {
         if (listarAsistencia.isEmpty()) {
             String message = "No se encontraron asistencias en la base de datos.";
             Map<String, String> response = new HashMap<>();
-            response.put("mensaje", message);
+            response.put("message", message);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         } else {
             return ResponseEntity.ok(listarAsistencia);

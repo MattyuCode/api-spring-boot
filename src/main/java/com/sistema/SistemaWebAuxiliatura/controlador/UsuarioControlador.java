@@ -19,37 +19,37 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api/CRUDUSUARIO")
 public class UsuarioControlador {
-//@Autowired
+    //@Autowired
 //private UsuarioServicio usuarioServicioImpl;
     //private UsuarioServicioImpl usuarioServicioImpl;
     @Autowired
     private UsuarioServicio usuarioServicio;
 
 
-@GetMapping
-@RequestMapping(value = "ConsultarUsuario", method = RequestMethod.GET)
-public ResponseEntity<?> ConsultarUsuario(){
-    List<Usuario> listarUsuario= this.usuarioServicio.listarTodosLosUsuarios();
-    return ResponseEntity.ok(listarUsuario);
-}
+    @GetMapping
+    @RequestMapping(value = "ConsultarUsuario", method = RequestMethod.GET)
+    public ResponseEntity<?> ConsultarUsuario() {
+        List<Usuario> listarUsuario = this.usuarioServicio.listarTodosLosUsuarios();
+        return ResponseEntity.ok(listarUsuario);
+    }
 
     @PostMapping
-    @RequestMapping(value ="CrearUsuario", method =  RequestMethod.POST)
-    public ResponseEntity<?> CrearUsuario(@RequestBody Usuario usuario){
+    @RequestMapping(value = "CrearUsuario", method = RequestMethod.POST)
+    public ResponseEntity<?> CrearUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioCreado = this.usuarioServicio.CrearUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCreado);
     }
 
     @PutMapping
     @RequestMapping(value = "ModificarUsuario", method = RequestMethod.PUT)
-    public ResponseEntity<?> ModificarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<?> ModificarUsuario(@RequestBody Usuario usuario) {
         Usuario EditaUsuario = this.usuarioServicio.CrearUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(EditaUsuario);
     }
 
     @GetMapping
     @RequestMapping(value = "BuscarUsuario/{idUsuario}", method = RequestMethod.GET)
-    public ResponseEntity<?> BuscarUsuario(@PathVariable long idUsuario){
+    public ResponseEntity<?> BuscarUsuario(@PathVariable long idUsuario) {
         Usuario BuscarUsuarioById = this.usuarioServicio.BuscarUsuario(idUsuario);
         return ResponseEntity.ok(BuscarUsuarioById);
     }
@@ -70,11 +70,10 @@ public ResponseEntity<?> ConsultarUsuario(){
 
     @DeleteMapping
     @RequestMapping(value = "EliminarUsuario/{idUsuario}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> EliminarUsuario(@PathVariable long idUsuario){
+    public ResponseEntity<?> EliminarUsuario(@PathVariable long idUsuario) {
         this.usuarioServicio.EliminarUsuario(idUsuario);
         return ResponseEntity.ok().build();
     }
-
 
 
 }
