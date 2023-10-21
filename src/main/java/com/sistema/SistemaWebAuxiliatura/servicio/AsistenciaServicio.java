@@ -5,7 +5,8 @@ import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Asistencia;
 import java.util.List;
 
 public interface AsistenciaServicio {
-    List<Asistencia> listarTodasLasAsistencias();
+
+    List<Asistencia> obtenerTodasLasAsistencias();
 
     Asistencia CrearAsistencia(Asistencia asistencia);
 

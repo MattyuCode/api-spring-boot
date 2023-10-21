@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Asistencia {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idAsistencia;
     private long idPersona;
-    private  String asistencia;
-    private  long tipoAsistencia;
-    private  String descripcion;
+    private String asistencia;
+    private long tipoAsistencia;
+    private String descripcion;
     @Nullable
-    private  long  idUsuarioRegistro;
+    private long idUsuarioRegistro;
     @Nullable
     private LocalDateTime fechaRegistro;
     @Nullable
     private long idUsuarioModifica;
     @Nullable
-    private  LocalDateTime fechaModificado;
+    private LocalDateTime fechaModificado;
 
 
     public Asistencia(long idAsistencia, long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, LocalDateTime fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
