@@ -18,7 +18,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
     private String nombreApellido;
+    @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
+
     private String email;
     private String contrasenia;
     private Long idRol;

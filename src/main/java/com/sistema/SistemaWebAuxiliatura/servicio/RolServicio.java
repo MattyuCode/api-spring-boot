@@ -14,7 +14,7 @@ public interface RolServicio {
 
     Rol CrearRol(Rol rol);
 
-    Rol ModificarRol(Rol rol);
+    Rol ModificarRol(Long idRol, Rol rol);
 
     Rol BuscarRol(long idRol);
 

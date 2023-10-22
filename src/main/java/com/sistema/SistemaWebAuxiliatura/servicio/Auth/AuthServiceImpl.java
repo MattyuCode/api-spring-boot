@@ -9,11 +9,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl implements  AuthService{
+public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-    @Override
+
+    /* @Override
     public UserDTO createUser(SignUpDTO signUpDTO) {
         Usuario user = new Usuario();
         user.setNombreApellido(signUpDTO.getName());
@@ -28,5 +29,18 @@ public class AuthServiceImpl implements  AuthService{
         userDTO.setName(createdUser.getNombreApellido());
         userDTO.setUsername(createdUser.getNombreUsuario());
         return userDTO;
+    }*/
+
+
+   @Override
+    public Usuario createUser(SignUpDTO signUpDTO) {
+        Usuario user = new Usuario();
+        user.setNombreApellido(signUpDTO.getName());
+        user.setEmail(signUpDTO.getEmail());
+        user.setNombreUsuario(signUpDTO.getUsername());
+        user.setIdRol(signUpDTO.getRol());
+        user.setContrasenia(new BCryptPasswordEncoder().encode(signUpDTO.getPassword()));
+        Usuario createdUser = usuarioRepositorio.save(user);
+        return createdUser;
     }
 }

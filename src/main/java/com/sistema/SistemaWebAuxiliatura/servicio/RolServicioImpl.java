@@ -28,8 +28,14 @@ public class RolServicioImpl implements RolServicio {
     }
 
     @Override
-    public Rol ModificarRol(Rol rol) {
-        return this.repositorio.save(rol);
+    public Rol ModificarRol(Long idRol, Rol rol) {
+        Rol udateRol = repositorio.findById(idRol).orElse(null);
+        if (udateRol != null){
+            udateRol.setNombreRol(rol.getNombreRol());
+            return repositorio.save(udateRol);
+        }
+        //return this.repositorio.save(rol);
+        return  null;
     }
 
 

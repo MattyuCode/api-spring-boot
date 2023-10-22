@@ -39,10 +39,14 @@ public class RolControlador {
 
 
     @PutMapping
-    @RequestMapping(value = "ModificarRol", method = RequestMethod.PUT)
-    public ResponseEntity<?> ModificarRol(@RequestBody Rol rol) {
-        Rol EditaRol = this.rolServicioImpl.ModificarRol(rol);
-        return ResponseEntity.status(HttpStatus.CREATED).body(EditaRol);
+    @RequestMapping(value = "ModificarRol/{idRol}", method = RequestMethod.PUT)
+    public ResponseEntity<?> ModificarRol(@PathVariable Long idRol, @RequestBody Rol rol) {
+        Rol updateRol = rolServicioImpl.ModificarRol(idRol, rol);
+        if (updateRol != null) {
+            return new ResponseEntity<>(updateRol, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
