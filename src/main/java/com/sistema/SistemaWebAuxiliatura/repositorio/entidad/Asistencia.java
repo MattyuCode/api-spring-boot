@@ -1,6 +1,7 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Asistencia {
@@ -21,14 +23,21 @@ public class Asistencia {
     @Nullable
     private long idUsuarioRegistro;
     @Nullable
-    private LocalDateTime fechaRegistro;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date fechaRegistro;
     @Nullable
     private long idUsuarioModifica;
     @Nullable
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaModificado;
 
 
-    public Asistencia(long idAsistencia, long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, LocalDateTime fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
+    public Asistencia() {
+    }
+
+    public Asistencia(long idAsistencia, long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, Date fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
         this.idAsistencia = idAsistencia;
         this.idPersona = idPersona;
         this.asistencia = asistencia;
@@ -38,22 +47,6 @@ public class Asistencia {
         this.fechaRegistro = fechaRegistro;
         this.idUsuarioModifica = idUsuarioModifica;
         this.fechaModificado = fechaModificado;
-    }
-
-    public Asistencia(long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, LocalDateTime fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
-
-        this.idPersona = idPersona;
-        this.asistencia = asistencia;
-        this.tipoAsistencia = tipoAsistencia;
-        this.descripcion = descripcion;
-        this.idUsuarioRegistro = idUsuarioRegistro;
-        this.fechaRegistro = fechaRegistro;
-        this.idUsuarioModifica = idUsuarioModifica;
-        this.fechaModificado = fechaModificado;
-    }
-
-    public Asistencia() {
-
     }
 
     public long getIdAsistencia() {
@@ -104,11 +97,11 @@ public class Asistencia {
         this.idUsuarioRegistro = idUsuarioRegistro;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
