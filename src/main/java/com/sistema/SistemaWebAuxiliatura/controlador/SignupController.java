@@ -40,7 +40,7 @@ public class SignupController {
             return new ResponseEntity<>(createdUser, HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             Map<String, String> response = new HashMap<>();
-            String message = "El nombre de usuario ya existen.";
+            String message = "El nombre de usuario ya existe.";
             response.put("message", message);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
