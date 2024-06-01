@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
     public Usuario createUser(SignUpDTO signUpDTO) {
         Usuario user = new Usuario();
         user.setNombreApellido(signUpDTO.getName());
-        user.setEmail(signUpDTO.getEmail());
+        user.setTelefono(signUpDTO.getTelefono());
         user.setNombreUsuario(signUpDTO.getUsername());
         user.setIdRol(signUpDTO.getRol());
         user.setContrasenia(new BCryptPasswordEncoder().encode(signUpDTO.getPassword()));

@@ -20,13 +20,17 @@ public class Usuario {
     private String nombreApellido;
     @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
-
-    private String email;
+    @Column(name = "isActive")
+    private boolean isActive = true;
+    private String telefono;
     private String contrasenia;
     private Long idRol;
 
+
     public Usuario() {
+
     }
+
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -52,12 +56,20 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean getIsActive() {
+        return isActive;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getContrasenia() {
@@ -75,4 +87,5 @@ public class Usuario {
     public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
+
 }

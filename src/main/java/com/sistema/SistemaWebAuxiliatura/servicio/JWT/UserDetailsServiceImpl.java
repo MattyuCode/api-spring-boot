@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario user =  userRepository.findBynombreUsuario(username);
         if(user == null){
-            throw new UsernameNotFoundException("User not found",null);
+            throw new UsernameNotFoundException("Usuario no encotrado",null);
         }
         return new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getContrasenia(), new ArrayList<>());
     }
