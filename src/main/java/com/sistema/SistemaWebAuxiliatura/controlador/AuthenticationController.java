@@ -3,6 +3,8 @@ package com.sistema.SistemaWebAuxiliatura.controlador;
 import com.sistema.SistemaWebAuxiliatura.DTO.AuthenticationDTO;
 import com.sistema.SistemaWebAuxiliatura.DTO.AuthenticationResponse;
 import com.sistema.SistemaWebAuxiliatura.Utils.JwtUtil;
+import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
+import com.sistema.SistemaWebAuxiliatura.servicio.CustomUserDetails;
 import com.sistema.SistemaWebAuxiliatura.servicio.JWT.UserDetailsServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,22 +71,23 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationDTO authenticationDTO) {
         try {
             //Encontrar el usuario si esta activo o no
-            UserDetails user = userDetailsService.loadUserByUsername(authenticationDTO.getUsername());
-//            if (user.isEnabled()) {
-//                Map<String, String> response = new HashMap<>();
-//                response.put("Message", "El usuario esta inactivo");
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//            }
+            CustomUserDetails customUserDetails  = (CustomUserDetails) userDetailsService.loadUserByUsername(authenticationDTO.getUsername());
+            Usuario user = customUserDetails.getUser();
+            if (!user.getIsActive()) {
+                Map<String, String> response = new HashMap<>();
+                response.put("Message", "El usuario esta inactivo");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
 
             //Comparando contraseña del ingresaddo por el usuario y el  que esta guardado en la DB
-            if (!passwordEncoder.matches(authenticationDTO.getPassword(), user.getPassword())) {
+            if (!passwordEncoder.matches(authenticationDTO.getPassword(), user.getContrasenia())) {
                 Map<String, String> response = new HashMap<>();
 //                response.put("Message", "Usuario o contraseña incorrecta");
                 response.put("Message", "Contraseña incorrecta");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
 
-            String access_token = jwtUtil.generateToken(user.getUsername());
+            String access_token = jwtUtil.generateToken(user.getNombreUsuario());
             String users = jwtUtil.extractUsername(access_token);
             Date expiractionToken = jwtUtil.extractExpiration(access_token);
 
