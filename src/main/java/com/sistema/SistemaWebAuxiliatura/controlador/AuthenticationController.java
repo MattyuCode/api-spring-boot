@@ -83,7 +83,7 @@ public class AuthenticationController {
                 response.put("Message", "Contraseña incorrecta");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
-
+// prueba
             String access_token = jwtUtil.generateToken(user.getUsername());
             String users = jwtUtil.extractUsername(access_token);
             Date expiractionToken = jwtUtil.extractExpiration(access_token);
