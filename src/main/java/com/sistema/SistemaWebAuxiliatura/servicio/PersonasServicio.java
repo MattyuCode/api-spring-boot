@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface PersonasServicio {
     public List<Listadogeneralpersona> listarTodasLasPersonas();
-
     Listadogeneralpersona CrearPersona(Listadogeneralpersona listadogeneralpersona);
     Listadogeneralpersona ModificarPersona(Listadogeneralpersona listadogeneralpersona);
     Listadogeneralpersona BuscarPersona(long idPersona);

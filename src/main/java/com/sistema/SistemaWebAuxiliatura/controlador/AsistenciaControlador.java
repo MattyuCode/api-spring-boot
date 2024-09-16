@@ -24,14 +24,14 @@ public class AsistenciaControlador {
     @GetMapping("/ConsultarAsistencia")
     public ResponseEntity<?> ConsultarAsistencia() {
         List<Asistencia> listarAsistencia = asistenciaServicio.obtenerTodasLasAsistencias();
-        if (listarAsistencia.isEmpty()) {
+       /* if (listarAsistencia.isEmpty()) {
             String message = "No se encontraron asistencias en la base de datos.";
             Map<String, String> response = new HashMap<>();
             response.put("message", message);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } else {
-            return ResponseEntity.ok(listarAsistencia);
-        }
+       } else {*/
+        return ResponseEntity.ok(listarAsistencia);
+        //}
     }
 
 

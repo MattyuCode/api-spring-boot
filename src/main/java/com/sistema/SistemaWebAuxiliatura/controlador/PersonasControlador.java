@@ -1,52 +1,78 @@
 package com.sistema.SistemaWebAuxiliatura.controlador;
 
+import com.sistema.SistemaWebAuxiliatura.repositorio.PersonasRepositorio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Listadogeneralpersona;
 import com.sistema.SistemaWebAuxiliatura.servicio.PersonasServicio;
+import com.sistema.SistemaWebAuxiliatura.servicio.PersonasServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
-@RequestMapping("CRUDPERSONAS")
+@RequestMapping("/api/CRUDPERSONAS")
 public class PersonasControlador {
+    /*
 @Autowired
-    private PersonasServicio  servicio;
+private PersonasServicio  servicio;
+*/
+@Autowired
+private PersonasRepositorio repositorio;
+
+    @Autowired
+    private PersonasServicioImpl implPersona;
 
 @GetMapping
     @RequestMapping(value = "ConsultarPersonas", method = RequestMethod.GET)
     public ResponseEntity<?> ConsultarPersonas(){
-    List<Listadogeneralpersona> listarPersona= this.servicio.listarTodasLasPersonas();
+    List<Listadogeneralpersona> listarPersona= this.implPersona.listarTodasLasPersonas();
     return  ResponseEntity.ok(listarPersona);
 }
 
 @PostMapping
     @RequestMapping(value = "CrearPersonas", method = RequestMethod.POST)
-    public ResponseEntity<?> CrearPersonas(@RequestBody Listadogeneralpersona listadogeneralpersona){
-    Listadogeneralpersona PersonaCreada = this.servicio.CrearPersona(listadogeneralpersona);
+    public ResponseEntity<?> CrearPersonas(@RequestBody Listadogeneralpersona listadogeneralpersona) {
+    Optional<Listadogeneralpersona> idExiste = repositorio.findByDpi(listadogeneralpersona.getDpi());
+    if (idExiste.isPresent()) {
+
+    Map<String, String> response = new HashMap<>();
+    response.put("mensaje", "La persona ya esta registrado");
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+}
+    Listadogeneralpersona PersonaCreada = this.implPersona.CrearPersona(listadogeneralpersona);
     return  ResponseEntity.status(HttpStatus.CREATED).body(PersonaCreada);
 }
 
 @PutMapping
     @RequestMapping(value = "ModificarPersona", method = RequestMethod.PUT)
     public ResponseEntity<?> ModificarPersona(@RequestBody Listadogeneralpersona listadogeneralpersona){
-    Listadogeneralpersona EditarPersona = this.servicio.ModificarPersona(listadogeneralpersona);
-    return ResponseEntity.status(HttpStatus.CREATED).body(EditarPersona);
+
+  Listadogeneralpersona personaExiste = this.implPersona.BuscarPersona(listadogeneralpersona.getIdPersona());
+  if (personaExiste == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Persona no encontrada.");
+    }
+    personaExiste.setNombreApellido(listadogeneralpersona.getNombreApellido());
+    personaExiste.setTelefono(listadogeneralpersona.getTelefono());
+    personaExiste.setSector(listadogeneralpersona.getSector());
+    personaExiste.setDpi(listadogeneralpersona.getDpi());
+
+    Listadogeneralpersona EditarPersona = this.implPersona.ModificarPersona(personaExiste);
+    return ResponseEntity.status(HttpStatus.OK).body(EditarPersona);
 }
 
     @GetMapping
     @RequestMapping(value = "BuscarPersona/{idPersona}", method = RequestMethod.GET)
     public ResponseEntity<?> BuscarPersona(@PathVariable long idPersona){
-        Listadogeneralpersona BuscarPersonaById = this.servicio.BuscarPersona(idPersona);
+        Listadogeneralpersona BuscarPersonaById = this.implPersona.BuscarPersona(idPersona);
         return ResponseEntity.ok(BuscarPersonaById);
     }
     @DeleteMapping
     @RequestMapping(value = "EliminarPersona/{idPersona}", method = RequestMethod.DELETE)
     public ResponseEntity<?> EliminarPersona(@PathVariable long idPersona){
-        this.servicio.EliminarPersona(idPersona);
+        this.implPersona.EliminarPersona(idPersona);
         return ResponseEntity.ok().build();
     }
 

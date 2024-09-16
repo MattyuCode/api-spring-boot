@@ -1,12 +1,15 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 public class Listadogeneralpersona {
@@ -17,24 +20,35 @@ public class Listadogeneralpersona {
     private Long telefono;
     private Long sector;
     private Long idUsuarioRegistro;
-    private LocalDateTime fechaRegistrado;
+    private String dpi;
 
 
 
+    //FECHA SE REGISTRA POR DEFAUL: FECHA ACTUAL
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime fechaRegistrado = LocalDateTime.now();
 
+    public LocalDateTime getFechaRegistrado() {
+        return fechaRegistrado;
+    }
 
-    public Listadogeneralpersona(String nombreApellido, long telefono, long sector, long idUsuarioRegistro) {
+    public void setFechaRegistrado(LocalDateTime fechaRegistrado) {
+        this.fechaRegistrado = fechaRegistrado;
+    }
+
+    public Listadogeneralpersona(String nombreApellido, long telefono, long sector, long idUsuarioRegistro, String dpi) {
 
         this.nombreApellido = nombreApellido;
         this.telefono = telefono;
         this.sector = sector;
         this.idUsuarioRegistro = idUsuarioRegistro;
-
+        this.dpi = dpi;
+        this.fechaRegistrado = LocalDateTime.now();
 
     }
 
     public Listadogeneralpersona() {
-
+        this.fechaRegistrado = LocalDateTime.now();
     }
 
     public Long getIdPersona() {
@@ -77,12 +91,12 @@ public class Listadogeneralpersona {
         this.idUsuarioRegistro = idUsuarioRegistro;
     }
 
-    public LocalDateTime getFechaRegistrado() {
-        return fechaRegistrado = LocalDateTime.now();
+    public String getDpi() {
+        return dpi;
     }
 
-    public void setFechaRegistrado(LocalDateTime fechaRegistrado) {
-        this.fechaRegistrado = fechaRegistrado;
+    public void setDpi(String dpi) {
+        this.dpi = dpi;
     }
 
 }

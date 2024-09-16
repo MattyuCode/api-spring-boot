@@ -24,21 +24,29 @@ public class PersonasServicioImpl  implements PersonasServicio{
      listadogeneralpersona.setSector(listadogeneralpersona.getSector());
      listadogeneralpersona.setIdUsuarioRegistro(listadogeneralpersona.getIdUsuarioRegistro());
      listadogeneralpersona.setFechaRegistrado(listadogeneralpersona.getFechaRegistrado());
+     listadogeneralpersona.setDpi(listadogeneralpersona.getDpi());
         return this.repositorio.save(listadogeneralpersona);
     }
 
-    public Listadogeneralpersona ModificarPersona(Listadogeneralpersona listadogeneralpersona){
-        return  this.repositorio.save(listadogeneralpersona);
+    public Listadogeneralpersona ModificarPersona(Listadogeneralpersona listadogeneralpersona) {
+
+       /* Listadogeneralpersona personaExiste = this.repositorio.findById(listadogeneralpersona.getIdPersona())
+                .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
+
+        personaExiste.setNombreApellido(listadogeneralpersona.getNombreApellido());
+        personaExiste.setTelefono(listadogeneralpersona.getTelefono());
+        personaExiste.setSector(listadogeneralpersona.getSector());
+        personaExiste.setDpi(listadogeneralpersona.getDpi());*/
+
+        return repositorio.save(listadogeneralpersona);
     }
 
     public Listadogeneralpersona BuscarPersona(long idPersona){
-
         return this.repositorio.findById(idPersona).get();
     }
 
     @Override
     public  void EliminarPersona(long idPersona){
-
         this.repositorio.deleteById(idPersona);
     }
 
