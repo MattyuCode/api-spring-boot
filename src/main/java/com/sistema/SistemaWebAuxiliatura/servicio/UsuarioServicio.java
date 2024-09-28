@@ -16,6 +16,8 @@ public interface UsuarioServicio{
     Usuario CrearUsuario(Usuario usuario);
     Usuario ModificarUsuario(Usuario usuario);
 
+    Usuario ModificarEstadoUsuario(Long id, boolean isActive);
+
     Usuario BuscarUsuario (long idUsuario);
 
     void EliminarUsuario(long idUsuario);

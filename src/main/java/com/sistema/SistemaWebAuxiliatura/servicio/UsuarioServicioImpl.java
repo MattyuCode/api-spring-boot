@@ -37,17 +37,36 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public Usuario CrearUsuario(Usuario usuario) {
-       /* BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();  */
+        /* BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();  */
        /* String encriptado = passwordEncoder.encode(usuario.getContrasenia());
         usuario.setContrasenia(encriptado);*/
-
 
 
         return repositorio.save(usuario);
     }
 
+    @Override
     public Usuario ModificarUsuario(Usuario usuario) {
+        Usuario usuarioExiste = this.repositorio.findById(usuario.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrada"));
+
+        usuarioExiste.setNombreApellido(usuario.getNombreApellido());
+        usuarioExiste.setNombreUsuario(usuario.getNombreUsuario());
+        usuarioExiste.setIdRol(usuario.getIdRol());
+        usuarioExiste.setContrasenia(usuario.getContrasenia());
+        usuarioExiste.setTelefono(usuario.getTelefono());
+
         return this.repositorio.save(usuario);
+    }
+
+
+    @Override
+    public Usuario ModificarEstadoUsuario(Long idUsuario, boolean isActive) {
+        Usuario usuarioExiste = this.repositorio.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuarioExiste.setIsActive(isActive);
+
+        return this.repositorio.save(usuarioExiste);
     }
 
 
