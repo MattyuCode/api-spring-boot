@@ -12,20 +12,23 @@ public class Actividadpago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long idActividadPago;
     private String nombreActividad;
+    private Double cantidad;
     private  Long idUsuario;
 
 
 
 
-    public Actividadpago(long idActividadPago, String nombreActividad, long idUsuario) {
+    public Actividadpago(long idActividadPago, String nombreActividad, double cantidad, long idUsuario) {
         this.idActividadPago = idActividadPago;
         this.nombreActividad = nombreActividad;
+        this.cantidad = cantidad;
         this.idUsuario = idUsuario;
     }
 
-    public Actividadpago(String nombreActividad, long idUsuario) {
+    public Actividadpago(String nombreActividad, double cantidad, long idUsuario) {
 
         this.nombreActividad = nombreActividad;
+        this.cantidad = cantidad;
         this.idUsuario = idUsuario;
     }
 
@@ -55,5 +58,13 @@ public class Actividadpago {
 
     public void setNombreActividad(String nombreActividad) {
         this.nombreActividad = nombreActividad;
+    }
+
+    public Double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Double cantidad) {
+        this.cantidad = cantidad;
     }
 }
