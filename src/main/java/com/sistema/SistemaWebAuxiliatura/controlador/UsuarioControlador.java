@@ -1,9 +1,11 @@
 package com.sistema.SistemaWebAuxiliatura.controlador;
 
 
+import com.sistema.SistemaWebAuxiliatura.DTO.EstadosUsuarioDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
 
 import com.sistema.SistemaWebAuxiliatura.servicio.UsuarioServicio;
+import com.sistema.SistemaWebAuxiliatura.servicio.UsuarioServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api/CRUDUSUARIO")
 public class UsuarioControlador {
-    //@Autowired
-//private UsuarioServicio usuarioServicioImpl;
-    //private UsuarioServicioImpl usuarioServicioImpl;
+    @Autowired
+    private UsuarioServicioImpl usuarioServicioImpl;
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -30,7 +31,9 @@ public class UsuarioControlador {
     @RequestMapping(value = "ConsultarUsuario", method = RequestMethod.GET)
     public ResponseEntity<?> ConsultarUsuario() {
         List<Usuario> listarUsuario = this.usuarioServicio.listarTodosLosUsuarios();
-        return ResponseEntity.ok(listarUsuario);
+        Map<String, List<Usuario>> response = new HashMap<>();
+        response.put("Result", listarUsuario);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -43,9 +46,17 @@ public class UsuarioControlador {
     @PutMapping
     @RequestMapping(value = "ModificarUsuario", method = RequestMethod.PUT)
     public ResponseEntity<?> ModificarUsuario(@RequestBody Usuario usuario) {
-        Usuario EditaUsuario = this.usuarioServicio.CrearUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(EditaUsuario);
+        Usuario EditaUsuario = this.usuarioServicioImpl.ModificarUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body(EditaUsuario);
     }
+
+    @PutMapping
+    @RequestMapping(value = "ModificarEstadoUsuario/{idUsuario}", method = RequestMethod.PUT)
+    public ResponseEntity<?> ModificarEstadoUsuario(@PathVariable Long idUsuario, @RequestBody EstadosUsuarioDTO estado) {
+        Usuario usuario = this.usuarioServicioImpl.ModificarEstadoUsuario(idUsuario, estado.getIsActive());
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
+    }
+
 
     @GetMapping
     @RequestMapping(value = "BuscarUsuario/{idUsuario}", method = RequestMethod.GET)

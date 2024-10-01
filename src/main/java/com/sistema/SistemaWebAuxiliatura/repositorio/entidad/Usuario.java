@@ -24,7 +24,7 @@ public class Usuario {
     private boolean isActive = true;
     private String telefono;
     private String contrasenia;
-    private Long idRol;
+    private String idRol;
 
 
     public Usuario() {
@@ -80,11 +80,11 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Long getIdRol() {
+    public String getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Long idRol) {
+    public void setIdRol(String idRol) {
         this.idRol = idRol;
     }
 
