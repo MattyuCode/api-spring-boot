@@ -31,6 +31,7 @@ public class SignupController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }*/
 
+    //logrado aqui
 
     @PostMapping("/register")
     public ResponseEntity<?> signupUser(@RequestBody SignUpDTO signupDTO) {
