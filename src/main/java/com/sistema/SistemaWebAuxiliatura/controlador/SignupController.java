@@ -45,5 +45,4 @@ public class SignupController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
-
 }
