@@ -2,19 +2,18 @@ package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
 
 @Entity
+
 public class Listadogeneralpersona {
 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idPersona;
     private String nombreApellido;
     private Long telefono;
@@ -48,7 +47,7 @@ public class Listadogeneralpersona {
     }
 
     public Listadogeneralpersona() {
-        this.fechaRegistrado = LocalDateTime.now();
+       this.fechaRegistrado = LocalDateTime.now();
     }
 
     public Long getIdPersona() {

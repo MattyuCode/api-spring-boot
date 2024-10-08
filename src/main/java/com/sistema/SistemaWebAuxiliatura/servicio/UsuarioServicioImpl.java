@@ -15,8 +15,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private UsuarioRepositorio repositorio;
-   /* @Autowired
-    private PasswordEncoder passwordEncoder;*/
+
 
 
     @Override

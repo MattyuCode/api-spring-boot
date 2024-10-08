@@ -3,8 +3,8 @@ package com.sistema.SistemaWebAuxiliatura.controlador;
 import com.sistema.SistemaWebAuxiliatura.repositorio.PersonasRepositorio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Listadogeneralpersona;
 import com.sistema.SistemaWebAuxiliatura.servicio.PersonasServicio;
-import com.sistema.SistemaWebAuxiliatura.servicio.PersonasServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,37 +12,30 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@Controller
+@RestController
 @RequestMapping("/api/CRUDPERSONAS")
 public class PersonasControlador {
     /*
 @Autowired
 private PersonasServicio  servicio;
 */
-@Autowired
-private PersonasRepositorio repositorio;
 
+    @Qualifier("personaServicioImpl")
     @Autowired
-    private PersonasServicioImpl implPersona;
+private PersonasServicio servicio;
 
-@GetMapping
+
+    @GetMapping
     @RequestMapping(value = "ConsultarPersonas", method = RequestMethod.GET)
     public ResponseEntity<?> ConsultarPersonas(){
-    List<Listadogeneralpersona> listarPersona= this.implPersona.listarTodasLasPersonas();
+    List<Listadogeneralpersona> listarPersona = this.servicio.listarTodasLasPersonas();
     return  ResponseEntity.ok(listarPersona);
 }
 
 @PostMapping
-    @RequestMapping(value = "CrearPersonas", method = RequestMethod.POST)
-    public ResponseEntity<?> CrearPersonas(@RequestBody Listadogeneralpersona listadogeneralpersona) {
-    Optional<Listadogeneralpersona> idExiste = repositorio.findByDpi(listadogeneralpersona.getDpi());
-    if (idExiste.isPresent()) {
-
-    Map<String, String> response = new HashMap<>();
-    response.put("mensaje", "La persona ya esta registrado");
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-}
-    Listadogeneralpersona PersonaCreada = this.implPersona.CrearPersona(listadogeneralpersona);
+@RequestMapping(value = "CrearPersonas", method = RequestMethod.POST)
+public ResponseEntity<?> CrearPersonas(@RequestBody Listadogeneralpersona listadogeneralpersona){
+    Listadogeneralpersona PersonaCreada = this.servicio.CrearPersona(listadogeneralpersona);
     return  ResponseEntity.status(HttpStatus.CREATED).body(PersonaCreada);
 }
 
@@ -50,7 +43,7 @@ private PersonasRepositorio repositorio;
     @RequestMapping(value = "ModificarPersona", method = RequestMethod.PUT)
     public ResponseEntity<?> ModificarPersona(@RequestBody Listadogeneralpersona listadogeneralpersona){
 
-  Listadogeneralpersona personaExiste = this.implPersona.BuscarPersona(listadogeneralpersona.getIdPersona());
+  Listadogeneralpersona personaExiste = this.servicio.BuscarPersona(listadogeneralpersona.getIdPersona());
   if (personaExiste == null) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Persona no encontrada.");
     }
@@ -59,20 +52,20 @@ private PersonasRepositorio repositorio;
     personaExiste.setSector(listadogeneralpersona.getSector());
     personaExiste.setDpi(listadogeneralpersona.getDpi());
 
-    Listadogeneralpersona EditarPersona = this.implPersona.ModificarPersona(personaExiste);
+    Listadogeneralpersona EditarPersona = this.servicio.ModificarPersona(personaExiste);
     return ResponseEntity.status(HttpStatus.OK).body(EditarPersona);
 }
 
     @GetMapping
     @RequestMapping(value = "BuscarPersona/{idPersona}", method = RequestMethod.GET)
     public ResponseEntity<?> BuscarPersona(@PathVariable long idPersona){
-        Listadogeneralpersona BuscarPersonaById = this.implPersona.BuscarPersona(idPersona);
+        Listadogeneralpersona BuscarPersonaById = this.servicio.BuscarPersona(idPersona);
         return ResponseEntity.ok(BuscarPersonaById);
     }
     @DeleteMapping
     @RequestMapping(value = "EliminarPersona/{idPersona}", method = RequestMethod.DELETE)
     public ResponseEntity<?> EliminarPersona(@PathVariable long idPersona){
-        this.implPersona.EliminarPersona(idPersona);
+        this.servicio.EliminarPersona(idPersona);
         return ResponseEntity.ok().build();
     }
 

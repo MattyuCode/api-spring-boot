@@ -91,9 +91,10 @@ public class AuthenticationController {
             String access_token = jwtUtil.generateToken(user.getNombreUsuario());
             String users = jwtUtil.extractUsername(access_token);
             Long idUsuario = user.getIdUsuario();
+            Integer idRol = user.getIdRol();
             Date expiractionToken = jwtUtil.extractExpiration(access_token);
 
-            AuthenticationResponse response = new AuthenticationResponse(access_token, users, idUsuario, expiractionToken);
+            AuthenticationResponse response = new AuthenticationResponse(access_token, users, idUsuario, idRol, expiractionToken);
             return ResponseEntity.ok(response);
 
         } catch (UsernameNotFoundException e) {
