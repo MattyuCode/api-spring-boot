@@ -4,6 +4,7 @@ import com.sistema.SistemaWebAuxiliatura.DTO.SignUpDTO;
 import com.sistema.SistemaWebAuxiliatura.DTO.UserDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
 import com.sistema.SistemaWebAuxiliatura.servicio.Auth.AuthService;
+import com.sistema.SistemaWebAuxiliatura.servicio.Auth.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class SignupController {
     @Autowired
-    private AuthService authService;
+    private AuthServiceImpl  authServiceIMPL;
 
     /* @PostMapping("/register")
     public ResponseEntity<?> signupUser(@RequestBody SignUpDTO signupDTO) {
@@ -36,7 +37,7 @@ public class SignupController {
     public ResponseEntity<?> signupUser(@RequestBody SignUpDTO signupDTO) {
 
         try {
-            Usuario createdUser = authService.createUser(signupDTO);
+            Usuario createdUser = authServiceIMPL.createUser(signupDTO);
             return new ResponseEntity<>(createdUser, HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             Map<String, String> response = new HashMap<>();
