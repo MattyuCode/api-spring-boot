@@ -17,7 +17,7 @@ import java.util.*;
 @RequestMapping("/api/CRUDPERSONAS")
 public class PersonasControlador {
 
-
+//LOGRADO
     //@Qualifier("personaServicioImpl")
     @Autowired
     private PersonaServicioImpl servicioIMPL;
