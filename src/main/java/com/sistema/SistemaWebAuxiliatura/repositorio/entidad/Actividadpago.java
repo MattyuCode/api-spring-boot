@@ -1,29 +1,37 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import javax.print.attribute.standard.MediaSize;
 
 
 @Entity
+@Table(name = "actividadpago")
 public class Actividadpago {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_actividad_pago")
     private  Long idActividadPago;
+
+    @Column(name = "nombre_actividad")
     private String nombreActividad;
+    @Column(name = "cantidad")
     private Double cantidad;
     private  Long idUsuario;
 
 
 
+//     @ManyToOne
+//    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+//    private Listadogeneralpersona idPersona;
 
-    public Actividadpago(long idActividadPago, String nombreActividad, double cantidad, long idUsuario) {
+
+    /*public Actividadpago(long idActividadPago, String nombreActividad, double cantidad, long idUsuario) {
         this.idActividadPago = idActividadPago;
         this.nombreActividad = nombreActividad;
         this.cantidad = cantidad;
         this.idUsuario = idUsuario;
-    }
+    }*/
 
     public Actividadpago(String nombreActividad, double cantidad, long idUsuario) {
 

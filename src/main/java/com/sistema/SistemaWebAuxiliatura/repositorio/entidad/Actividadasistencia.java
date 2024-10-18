@@ -1,17 +1,18 @@
 package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table (name = "actividadasistencia")
 public class Actividadasistencia {
 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_actividad_asistencia")
     private Long idActividadAsistencia;
+    @Column (name = "nombre_actividad")
     private String nombreActividad;
+
     private  Long idUsuario;
 
     public Actividadasistencia(Long idActividadAsistencia, String nombreActividad, Long usuario) {

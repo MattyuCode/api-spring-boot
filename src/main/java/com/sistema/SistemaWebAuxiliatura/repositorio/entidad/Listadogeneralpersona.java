@@ -9,14 +9,19 @@ import java.time.LocalDateTime;
 
 
 @Entity
-
+@Table(name = "listadogeneralpersona")
 public class Listadogeneralpersona {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "id_persona")
     private Long idPersona;
+
+    @Column(name = "nombre_apellido")
     private String nombreApellido;
+    @Column(name = "telefono")
     private Long telefono;
+
+    @Column(name = "sector")
     private Long sector;
     private Long idUsuarioRegistro;
     private String dpi;
@@ -35,7 +40,7 @@ public class Listadogeneralpersona {
         this.fechaRegistrado = fechaRegistrado;
     }
 
-    public Listadogeneralpersona(String nombreApellido, long telefono, long sector, long idUsuarioRegistro, String dpi) {
+    /*public Listadogeneralpersona(String nombreApellido, long telefono, long sector, long idUsuarioRegistro, String dpi) {
 
         this.nombreApellido = nombreApellido;
         this.telefono = telefono;
@@ -44,7 +49,8 @@ public class Listadogeneralpersona {
         this.dpi = dpi;
         this.fechaRegistrado = LocalDateTime.now();
 
-    }
+    }*/
+
 
     public Listadogeneralpersona() {
        this.fechaRegistrado = LocalDateTime.now();

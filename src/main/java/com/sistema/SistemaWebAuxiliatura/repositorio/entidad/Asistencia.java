@@ -3,22 +3,25 @@ package com.sistema.SistemaWebAuxiliatura.repositorio.entidad;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Table (name = "asistencia")
 public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idAsistencia;
-    private long idPersona;
-    private String asistencia;
-    private long tipoAsistencia;
+
+    @ManyToOne
+    @JoinColumn  (name = "id_persona", referencedColumnName = "id_persona")
+    private Listadogeneralpersona idPersona;
+
+    @ManyToOne
+    @JoinColumn (name = "tipo_asistencia", referencedColumnName = "id_actividad_asistencia")
+    private Actividadasistencia tipoAsistencia;
     private String descripcion;
     @Nullable
     private long idUsuarioRegistro;
@@ -36,7 +39,7 @@ public class Asistencia {
 
     public Asistencia() {
     }
-
+/*
     public Asistencia(long idAsistencia, long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, Date fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
         this.idAsistencia = idAsistencia;
         this.idPersona = idPersona;
@@ -48,7 +51,7 @@ public class Asistencia {
         this.idUsuarioModifica = idUsuarioModifica;
         this.fechaModificado = fechaModificado;
     }
-
+*/
     public long getIdAsistencia() {
         return idAsistencia;
     }
@@ -57,27 +60,21 @@ public class Asistencia {
         this.idAsistencia = idAsistencia;
     }
 
-    public long getIdPersona() {
+    public Listadogeneralpersona getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(long idPersona) {
+    public void setIdPersona(Listadogeneralpersona idPersona) {
         this.idPersona = idPersona;
     }
 
-    public String getAsistencia() {
-        return asistencia;
-    }
 
-    public void setAsistencia(String asistencia) {
-        this.asistencia = asistencia;
-    }
 
-    public long getTipoAsistencia() {
+    public Actividadasistencia getTipoAsistencia() {
         return tipoAsistencia;
     }
 
-    public void setTipoAsistencia(long tipoAsistencia) {
+    public void setTipoAsistencia(Actividadasistencia tipoAsistencia) {
         this.tipoAsistencia = tipoAsistencia;
     }
 

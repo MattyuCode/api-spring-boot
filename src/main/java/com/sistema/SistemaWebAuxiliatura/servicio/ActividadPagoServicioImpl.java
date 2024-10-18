@@ -1,6 +1,7 @@
 package com.sistema.SistemaWebAuxiliatura.servicio;
 
 
+import com.sistema.SistemaWebAuxiliatura.DTO.ActividadSinPagoDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.ActividadPagoRepositorio;
 
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadpago;
@@ -9,10 +10,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ActividadPagoServicioImpl implements ActividadPagoServicio {
     @Autowired
     private ActividadPagoRepositorio actividadPagoRepositorio;
+    public Actividadpago obtenerActividadPorId(Long actividadId) {
+        return actividadPagoRepositorio.findById(actividadId)
+                .orElseThrow(() -> new RuntimeException("Actividad no encontrada"));
+    }
 
     @Override
     public List<Actividadpago> listarTodosLasActividades() {

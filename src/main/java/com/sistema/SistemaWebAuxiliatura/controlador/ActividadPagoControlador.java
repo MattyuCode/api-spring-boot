@@ -1,5 +1,6 @@
 package com.sistema.SistemaWebAuxiliatura.controlador;
 
+import com.sistema.SistemaWebAuxiliatura.DTO.ActividadSinPagoDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadpago;
 import com.sistema.SistemaWebAuxiliatura.servicio.ActividadPagoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/api/CRUDACTIVIDAD")
 public class ActividadPagoControlador {
     @Autowired
     private ActividadPagoServicio servicio;
-   @GetMapping
+
+    @Autowired
+    private final ActividadPagoServicio actividadPagoServicio;
+
+    @Autowired
+    public ActividadPagoControlador(ActividadPagoServicio actividadPagoServicio) {
+        this.actividadPagoServicio = actividadPagoServicio;
+    }
+
+
+
+
+    @GetMapping
     @RequestMapping(value = "ConsultarActividad", method = RequestMethod.GET)
     public ResponseEntity<?> ConsultarActividad(){
         List<Actividadpago> listarActividad= this.servicio.listarTodosLasActividades();
@@ -24,7 +38,7 @@ public class ActividadPagoControlador {
     }
 
 
-   @PostMapping
+    @PostMapping
     @RequestMapping(value = "CrearActividad", method = RequestMethod.POST)
     public ResponseEntity<?> CrearActividad(@RequestBody Actividadpago actividadpago){
         Actividadpago ActividadCreada = this.servicio.CrearActividad(actividadpago);
@@ -52,6 +66,4 @@ public class ActividadPagoControlador {
         this.servicio.EliminarActividad(idActividad);
         return ResponseEntity.ok().build();
     }
-    }
-
-
+}

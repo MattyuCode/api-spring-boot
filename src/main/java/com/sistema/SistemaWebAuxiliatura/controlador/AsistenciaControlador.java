@@ -1,6 +1,7 @@
 package com.sistema.SistemaWebAuxiliatura.controlador;
 
 
+import com.sistema.SistemaWebAuxiliatura.DTO.AsistenciaPendienteDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Asistencia;
 import com.sistema.SistemaWebAuxiliatura.servicio.AsistenciaServicio;
 import com.sistema.SistemaWebAuxiliatura.servicio.AsistenciaServicioImpl;
@@ -20,6 +21,15 @@ public class AsistenciaControlador {
     @Autowired
     private AsistenciaServicio asistenciaServicio;
 
+
+    @GetMapping("/pendientes/{idPersona}")
+    public ResponseEntity<List<AsistenciaPendienteDTO>> obtenerAsistenciasPendientes(@PathVariable Long idPersona){
+        List<AsistenciaPendienteDTO> asistenciasPendientes = asistenciaServicio.obtenerAsistenciaPendiente(idPersona);
+        if (asistenciasPendientes.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(asistenciasPendientes);
+    }
 
     @GetMapping("/ConsultarAsistencia")
     public ResponseEntity<?> ConsultarAsistencia() {
