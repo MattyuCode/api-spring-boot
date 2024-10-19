@@ -4,9 +4,15 @@ public class AsistenciaPendienteDTO {
     private Long idActivdadAsistencia;
     private String nombreActividad;
 
+    //private String nombreApellido;
+
+
+
+
     public AsistenciaPendienteDTO(Long idActivdadAsistencia, String nombreActividad) {
         this.idActivdadAsistencia = idActivdadAsistencia;
         this.nombreActividad = nombreActividad;
+
     }
 
     public Long getIdActivdadAsistencia() {

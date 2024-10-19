@@ -16,5 +16,10 @@ public interface AsistenciaRepositorio  extends CrudRepository<Asistencia, Long>
     @Query("SELECT new com.sistema.SistemaWebAuxiliatura.DTO.AsistenciaPendienteDTO(ap.idActividadAsistencia, ap.nombreActividad) "+
           "FROM Actividadasistencia ap LEFT JOIN Asistencia p ON ap.idActividadAsistencia = p.tipoAsistencia.idActividadAsistencia "+
           "AND p.idPersona.idPersona = :idPersona WHERE p.idAsistencia IS NULL ")
+
+    /*@Query("SELECT NEW com.sistema.SistemaWebAuxiliatura.DTO.AsistenciaPendienteDTO(lp.idActividadAsistencia, lp.nombreActividad, aa.nombreApellido) from Actividadasistencia lp, Listadogeneralpersona aa where lp.")*/
+
     List<AsistenciaPendienteDTO> findAsistenciaPendientePorPersona(@Param("idPersona") Long idPersona);
+
+
 }

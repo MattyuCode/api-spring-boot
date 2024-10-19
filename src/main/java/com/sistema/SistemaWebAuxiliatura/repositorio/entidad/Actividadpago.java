@@ -20,19 +20,6 @@ public class Actividadpago {
     private  Long idUsuario;
 
 
-
-//     @ManyToOne
-//    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-//    private Listadogeneralpersona idPersona;
-
-
-    /*public Actividadpago(long idActividadPago, String nombreActividad, double cantidad, long idUsuario) {
-        this.idActividadPago = idActividadPago;
-        this.nombreActividad = nombreActividad;
-        this.cantidad = cantidad;
-        this.idUsuario = idUsuario;
-    }*/
-
     public Actividadpago(String nombreActividad, double cantidad, long idUsuario) {
 
         this.nombreActividad = nombreActividad;

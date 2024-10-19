@@ -28,6 +28,7 @@ public class PersonaSinPagoController {
 
 
    // Muestra las personas que no tienen registrado el idTipoPago
+    // api/SINPAGO/personasinPago2/{idTipoPago}
     @GetMapping("/personasinPago2/{idTipoPago}")
     public ResponseEntity<List<PersonaSinPagoDTO>> obtenerPersonaPendiente(@PathVariable Long idTipoPago){
         List<PersonaSinPagoDTO> personaSinPagoDTOS = personaServiceSinPago.obtenerPersonaPendiente(idTipoPago);

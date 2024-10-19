@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/SINASISTENCIA")
 public class PersonaSinAsistenciaController {
+    ///api//personaSinAsistencia/{tipoAsistencia}
     @Autowired
     private PersonaServiceSinAsistenciaImpl personaServiceSinAsistencia;
     @GetMapping ("/personaSinAsistencia/{tipoAsistencia}")

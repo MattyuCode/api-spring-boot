@@ -21,12 +21,7 @@ public class Actividadasistencia {
         this.idUsuario = usuario;
     }
 
-    public Actividadasistencia(String nombreActividad, Long usuario) {
 
-        this.nombreActividad = nombreActividad;
-        this.idUsuario= usuario;
-
-    }
 
     public Actividadasistencia() {
 

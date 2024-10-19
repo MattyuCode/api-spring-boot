@@ -3,6 +3,7 @@ package com.sistema.SistemaWebAuxiliatura.controlador;
 
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadasistencia;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadpago;
+import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Usuario;
 import com.sistema.SistemaWebAuxiliatura.servicio.ActividadAsistenciaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/api/CRUDACTIVIDADASISTENCIA")
@@ -22,7 +25,9 @@ public class ActividadAsistenciaControlador {
     @RequestMapping(value ="ConsultarActividad", method = RequestMethod.GET)
     public ResponseEntity<?> ConsultarActividad(){
         List<Actividadasistencia> listarActividad = this.actividadAsistenciaServicio.listarTodasLasActividades();
-        return ResponseEntity.ok(listarActividad);
+        Map<String, List<Actividadasistencia>> response = new HashMap<>();
+        response.put("Result", listarActividad);
+        return ResponseEntity.ok(response);
     }
 
 
