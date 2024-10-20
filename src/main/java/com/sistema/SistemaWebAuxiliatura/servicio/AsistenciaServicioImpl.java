@@ -1,6 +1,7 @@
 package com.sistema.SistemaWebAuxiliatura.servicio;
 
 import com.sistema.SistemaWebAuxiliatura.DTO.AsistenciaPendienteDTO;
+import com.sistema.SistemaWebAuxiliatura.DTO.PersonaSinAsistenciaDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.AsistenciaRepositorio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,16 @@ public class AsistenciaServicioImpl implements AsistenciaServicio {
     @Autowired
     private AsistenciaRepositorio asistenciaRepositorio;
 
-
     @Override
-    public List<AsistenciaPendienteDTO> obtenerAsistenciaPendiente(Long idPersona) {
-        return asistenciaRepositorio.findAsistenciaPendientePorPersona(idPersona);
-
+    public List<AsistenciaPendienteDTO> obtenerAsistenciasPendientes(Long idPersona) {
+        return asistenciaRepositorio.findAsistenciasPendientes(idPersona);
     }
+    @Autowired
+    public void AsistenciaServicioImpl(AsistenciaRepositorio asistenciaRepositorio) {
+        this.asistenciaRepositorio = asistenciaRepositorio;
+    }
+
+
 
     @Override
     public List<Asistencia> obtenerTodasLasAsistencias() {
