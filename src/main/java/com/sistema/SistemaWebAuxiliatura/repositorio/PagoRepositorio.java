@@ -15,8 +15,15 @@ public interface PagoRepositorio extends JpaRepository<Pago, Long> {
  //FUNCIONA
         List<Pago> findByidPersona_IdPersona(Long idPersona);
 
-        @Query("SELECT new com.sistema.SistemaWebAuxiliatura.DTO.PagoPendienteDTO(ap.idActividadPago, ap.nombreActividad, ap.cantidad) " +
+     /*   @Query("SELECT new com.sistema.SistemaWebAuxiliatura.DTO.PagoPendienteDTO(ap.idActividadPago, ap.nombreActividad, ap.cantidad) " +
                 "FROM Actividadpago ap LEFT JOIN Pago p ON ap.idActividadPago = p.idTipoPago.idActividadPago " +
-                "AND p.idPersona.idPersona = :idPersona WHERE p.idPago IS NULL")
+                "AND p.idPersona.idPersona = :idPersona WHERE p.idPago IS NULL")*/
+
+
+        @Query("SELECT NEW com.sistema.SistemaWebAuxiliatura.DTO.PagoPendienteDTO(ap.idActividadPago, ap.nombreActividad, ap.cantidad, lp.idPersona, lp.nombreApellido)" +
+                "FROM Actividadpago ap " +
+                "LEFT JOIN Pago p ON ap.idActividadPago = p.idTipoPago.idActividadPago AND p.idPersona.idPersona = :idPersona " +
+                "LEFT JOIN Listadogeneralpersona lp ON lp.idPersona = :idPersona " +
+                "WHERE p.idPago IS NULL")
         List<PagoPendienteDTO> findPagosPendientesPorPersona(@Param("idPersona") Long idPersona);
 }

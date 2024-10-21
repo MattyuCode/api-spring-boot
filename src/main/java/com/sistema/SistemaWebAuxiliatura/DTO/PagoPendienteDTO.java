@@ -5,11 +5,32 @@ public class PagoPendienteDTO {
     private Long idActividadPago;
     private String nombreActividad;
     private Double cantidad;
+    private Long idPersona;
+    private String nombreApellido;
 
-    public PagoPendienteDTO(Long idActividadPago, String nombreActividad, Double cantidad) {
+
+    public PagoPendienteDTO(Long idActividadPago, String nombreActividad, Double cantidad, Long idPersona, String nombreApellido) {
         this.idActividadPago = idActividadPago;
         this.nombreActividad = nombreActividad;
         this.cantidad = cantidad;
+        this.idPersona = idPersona;
+        this.nombreApellido = nombreApellido;
+    }
+
+    public Long getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(Long idPersona) {
+        this.idPersona = idPersona;
+    }
+
+    public String getNombreApellido() {
+        return nombreApellido;
+    }
+
+    public void setNombreApellido(String nombreApellido) {
+        this.nombreApellido = nombreApellido;
     }
 
     public Long getIdActividadPago() {

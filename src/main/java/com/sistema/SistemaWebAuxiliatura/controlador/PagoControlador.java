@@ -93,6 +93,7 @@ public class PagoControlador {
         return ResponseEntity.status(HttpStatus.CREATED).body(EditarPago);
     }
 
+    /// no busca los pagos
     @GetMapping
     @RequestMapping(value = "BuscarPago/{idPago}", method = RequestMethod.GET)
     public ResponseEntity<?> BuscarPago(@PathVariable long idPago){

@@ -9,49 +9,42 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table (name = "asistencia")
+@Table(name = "asistencia")
 public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idAsistencia;
 
     @ManyToOne
-    @JoinColumn  (name = "id_persona", referencedColumnName = "id_persona")
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     private Listadogeneralpersona idPersona;
 
     @ManyToOne
-    @JoinColumn (name = "tipo_asistencia", referencedColumnName = "id_actividad_asistencia")
+    @JoinColumn(name = "tipo_asistencia", referencedColumnName = "id_actividad_asistencia")
     private Actividadasistencia tipoAsistencia;
     private String descripcion;
     @Nullable
+    @Column(name = "id_usuarioregistro")
     private long idUsuarioRegistro;
     @Nullable
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro = LocalDateTime.now();
     @Nullable
+    @Column(name = "id_usuariomodifica")
     private long idUsuarioModifica;
     @Nullable
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fechaModificado;
+    private LocalDateTime fechaModificado  = LocalDateTime.now();
 
 
     public Asistencia() {
+        this.fechaRegistro = LocalDateTime.now();
+        this.fechaModificado = LocalDateTime.now();
     }
-/*
-    public Asistencia(long idAsistencia, long idPersona, String asistencia, long tipoAsistencia, String descripcion, long idUsuarioRegistro, Date fechaRegistro, long idUsuarioModifica, LocalDateTime fechaModificado) {
-        this.idAsistencia = idAsistencia;
-        this.idPersona = idPersona;
-        this.asistencia = asistencia;
-        this.tipoAsistencia = tipoAsistencia;
-        this.descripcion = descripcion;
-        this.idUsuarioRegistro = idUsuarioRegistro;
-        this.fechaRegistro = fechaRegistro;
-        this.idUsuarioModifica = idUsuarioModifica;
-        this.fechaModificado = fechaModificado;
-    }
-*/
+
+
     public long getIdAsistencia() {
         return idAsistencia;
     }
@@ -67,7 +60,6 @@ public class Asistencia {
     public void setIdPersona(Listadogeneralpersona idPersona) {
         this.idPersona = idPersona;
     }
-
 
 
     public Actividadasistencia getTipoAsistencia() {
@@ -94,11 +86,11 @@ public class Asistencia {
         this.idUsuarioRegistro = idUsuarioRegistro;
     }
 
-    public Date getFechaRegistro() {
+    public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
