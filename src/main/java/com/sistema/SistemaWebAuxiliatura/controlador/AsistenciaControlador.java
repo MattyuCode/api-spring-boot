@@ -74,7 +74,7 @@ public class AsistenciaControlador {
 
 
     @GetMapping
-    @RequestMapping(value = "EliminarAsistencia/{idPago}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "EliminarAsistencia/{idAsistencia}", method = RequestMethod.DELETE)
     public ResponseEntity<?> EliminarAsistencia(@PathVariable long idAsistencia) {
         this.asistenciaServicioIMPL.EliminarAsistencia(idAsistencia);
         return ResponseEntity.ok().build();

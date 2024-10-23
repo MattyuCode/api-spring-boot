@@ -4,6 +4,7 @@ import com.sistema.SistemaWebAuxiliatura.DTO.PagoPendienteDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Pago;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PagosServicio {
 
@@ -14,7 +15,7 @@ public interface PagosServicio {
 
 
 
-    Pago CrearPago(Pago pago);
+    Pago CrearPago(Map<String, Object> pagoData);
 
     Pago ModificarPago(Pago pago);
 

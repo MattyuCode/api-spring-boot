@@ -4,6 +4,7 @@ package com.sistema.SistemaWebAuxiliatura.servicio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.ActividadAsistenciaRepositorio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadasistencia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +40,12 @@ public class ActividadAsistenciaServicioImpl  implements  ActividadAsistenciaSer
 
     @Override
     public void EliminarActividad(long idActividadAsistencia) {
-        this.actividadAsistenciaRepositorio.deleteById(idActividadAsistencia);
+        try {
+            this.actividadAsistenciaRepositorio.deleteById(idActividadAsistencia);
+        }catch (DataIntegrityViolationException ex ){
+            throw new IllegalStateException("No se puede eliminar esta actividad de asistencia porque está registrada en otras actividades.");
+        }
+
 
     }
 
