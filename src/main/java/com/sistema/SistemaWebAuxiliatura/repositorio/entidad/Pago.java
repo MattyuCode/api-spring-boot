@@ -30,7 +30,6 @@ public class Pago {
     @JoinColumn(name = "id_tipo_pago", referencedColumnName = "id_actividad_pago")
     private Actividadpago idTipoPago;
 
-    private Double cantidad_Q;
 
     private String descripcion;
     @Nullable
@@ -86,13 +85,6 @@ public class Pago {
         this.idTipoPago = idTipoPago;
     }
 
-    public Double getCantidad_Q() {
-        return cantidad_Q;
-    }
-
-    public void setCantidad_Q(Double cantidad_Q) {
-        this.cantidad_Q = cantidad_Q;
-    }
 
     public String getDescripcion() {
         return descripcion;

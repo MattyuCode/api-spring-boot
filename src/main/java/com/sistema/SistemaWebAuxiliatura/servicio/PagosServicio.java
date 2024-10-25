@@ -17,7 +17,7 @@ public interface PagosServicio {
 
     Pago CrearPago(Map<String, Object> pagoData);
 
-    Pago ModificarPago(Pago pago);
+    Pago ModificarPago(Map<String, Object> pagoData);
 
     Pago BuscarPago(long idPago);
 

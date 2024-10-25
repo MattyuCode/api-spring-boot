@@ -1,7 +1,6 @@
 package com.sistema.SistemaWebAuxiliatura.servicio;
 
 
-
 import com.sistema.SistemaWebAuxiliatura.DTO.PagoPendienteDTO;
 import com.sistema.SistemaWebAuxiliatura.repositorio.ActividadPagoRepositorio;
 import com.sistema.SistemaWebAuxiliatura.repositorio.PersonasRepositorio;
@@ -14,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class PagosServicioImpl implements PagosServicio{
+public class PagosServicioImpl implements PagosServicio {
     @Autowired
     private PagoRepositorio pagoRepositorio;
 
@@ -28,27 +28,27 @@ public class PagosServicioImpl implements PagosServicio{
     private ActividadPagoRepositorio actividadPagoRepositorio;
 
     @Override
-    public List<PagoPendienteDTO> obtenerPagosPendientes(Long idPersona){
+    public List<PagoPendienteDTO> obtenerPagosPendientes(Long idPersona) {
         return pagoRepositorio.findPagosPendientesPorPersona(idPersona);
     }
 
 
     @Override
-    public List<Pago>listarTodosLosPagos(){
+    public List<Pago> listarTodosLosPagos() {
         return (List<Pago>) pagoRepositorio.findAll();
 
     }
 
 
     @Override
-    public Pago CrearPago(Map<String, Object> pagoData){
+    public Pago CrearPago(Map<String, Object> pagoData) {
         Pago newPago = new Pago();
 
         Long idPersona = Long.valueOf(pagoData.get("idPersona").toString());
         Listadogeneralpersona persona = personaRepo.findById(idPersona).orElseThrow(() -> new RuntimeException("Persona no encontrada"));
 
         Long idTipoPago = Long.valueOf(pagoData.get("idTipoPago").toString());
-        Actividadpago actividadpago = actividadPagoRepositorio.findById(idTipoPago).orElseThrow(()-> new RuntimeException("Id tipo pago no encontrado"));
+        Actividadpago actividadpago = actividadPagoRepositorio.findById(idTipoPago).orElseThrow(() -> new RuntimeException("Id tipo pago no encontrado"));
 
         newPago.setIdPersona(persona);
         newPago.setIdTipoPago(actividadpago);
@@ -69,20 +69,40 @@ public class PagosServicioImpl implements PagosServicio{
         pago.setFechaModificado(pago.getFechaModificado());
         return this.pagoRepositorio.save(pago);*/
     }
-    @Override
-    public Pago ModificarPago(Pago pago){
-        return this.pagoRepositorio.save(pago);
-    }
 
     @Override
-    public  Pago BuscarPago(long idPago){
+    public Pago ModificarPago(Map<String, Object> pagoData) {
+        Long idPago = Long.valueOf(pagoData.get("idPago").toString());
+        Pago pagoExistente = pagoRepositorio.findById(idPago)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrada"));
+
+        Long idPersona = Long.valueOf(pagoData.get("idPersona").toString());
+        Listadogeneralpersona persona = personaRepo.findById(idPersona)
+                .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
+
+        Long idTipoPago = Long.valueOf(pagoData.get("idTipoPago").toString());
+        Actividadpago actividadpago = actividadPagoRepositorio.findById(idTipoPago)
+                .orElseThrow(() -> new RuntimeException("Tipo de pago no encontrado"));
+
+        pagoExistente.setIdPersona(persona);
+        pagoExistente.setIdTipoPago(actividadpago);
+        pagoExistente.setDescripcion(pagoData.get("descripcion").toString());
+        pagoExistente.setIdUsuarioRegistro(Long.valueOf(pagoData.get("idUsuarioRegistro").toString()));
+        pagoExistente.setIdUsuarioModifica(Long.valueOf(pagoData.get("idUsuarioModifica").toString()));
+
+        pagoExistente.setFechaModificado(LocalDateTime.now());
+
+        return this.pagoRepositorio.save(pagoExistente);
+    }
+// que sigue? va
+    @Override
+    public Pago BuscarPago(long idPago) {
         return this.pagoRepositorio.findById(idPago).get();
     }
 
 
-
     @Override
-    public void EliminarPago(long idPago){
+    public void EliminarPago(long idPago) {
         this.pagoRepositorio.deleteById(idPago);
     }
 
@@ -98,7 +118,7 @@ public class PagosServicioImpl implements PagosServicio{
 
 
     @Override
-    public List<Pago>findByidPersona(Long idPersona) {
+    public List<Pago> findByidPersona(Long idPersona) {
         return pagoRepositorio.findByidPersona_IdPersona(idPersona);
     }
 }
