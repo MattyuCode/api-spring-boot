@@ -42,6 +42,13 @@ public class AsistenciaControlador {
    }
 
 
+   @PutMapping
+   @RequestMapping(value = "ActualizarAsistencia", method =  RequestMethod.PUT)
+   public ResponseEntity<?> ActualizarAsistencia(@RequestBody  Map<String, Object>  newAsistencia){
+       Asistencia editarAsistencia = this.asistenciaServicioIMPL.ModificarAsistencia(newAsistencia);
+       return ResponseEntity.status(HttpStatus.OK).body(editarAsistencia);
+   }
+
     @GetMapping
     @RequestMapping(value ="/pendientes/{idPersona}", method =  RequestMethod.GET)
     public ResponseEntity<?> pendientes(@PathVariable Long idPersona) {

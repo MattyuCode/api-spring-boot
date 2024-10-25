@@ -17,7 +17,7 @@ public interface AsistenciaServicio {
 
     Asistencia crearAsistencia(Map<String, Object> asistenciaData);
 
-    Asistencia ModificarAsistencia(Asistencia asistencia);
+    Asistencia ModificarAsistencia(Map<String, Object> asistenciaData);
 
     Asistencia BuscarAsistencia(long idAsistencia);
 

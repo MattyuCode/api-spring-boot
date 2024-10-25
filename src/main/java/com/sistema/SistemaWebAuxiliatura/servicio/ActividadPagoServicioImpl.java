@@ -6,6 +6,7 @@ import com.sistema.SistemaWebAuxiliatura.repositorio.ActividadPagoRepositorio;
 
 import com.sistema.SistemaWebAuxiliatura.repositorio.entidad.Actividadpago;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ActividadPagoServicioImpl implements ActividadPagoServicio {
     @Autowired
     private ActividadPagoRepositorio actividadPagoRepositorio;
+
     public Actividadpago obtenerActividadPorId(Long actividadId) {
         return actividadPagoRepositorio.findById(actividadId)
                 .orElseThrow(() -> new RuntimeException("Actividad no encontrada"));
@@ -42,7 +44,11 @@ public class ActividadPagoServicioImpl implements ActividadPagoServicio {
 
     @Override
     public void EliminarActividad(long idActividadPago) {
+        try {
+            this.actividadPagoRepositorio.deleteById(idActividadPago);
+        } catch (DataIntegrityViolationException ex) {
+            throw new IllegalStateException("No se puede eliminar esta actividad pago porque está registrada en otras actividades.");
+        }
 
-        this.actividadPagoRepositorio.deleteById(idActividadPago);
     }
 }

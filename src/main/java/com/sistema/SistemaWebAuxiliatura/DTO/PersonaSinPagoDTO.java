@@ -2,25 +2,41 @@ package com.sistema.SistemaWebAuxiliatura.DTO;
 
 public class PersonaSinPagoDTO {
 
-    private Long idPersona;
-    private String nombreApellido;
-    private String nombreActividad;
+    private Long id_persona;
+    private String nombre_apellido;
+    private String nombre_actividad;
     private Double cantidad;
 
-
-    public PersonaSinPagoDTO(Long idPersona, String nombreApellido, String nombreActividad, Double cantidad) {
-        this.idPersona = idPersona;
-        this.nombreApellido = nombreApellido;
-        this.nombreActividad = nombreActividad;
+    public PersonaSinPagoDTO(Long id_persona, String nombre_apellido, String nombre_actividad, Double cantidad) {
+        this.id_persona = id_persona;
+        this.nombre_apellido = nombre_apellido;
+        this.nombre_actividad = nombre_actividad;
         this.cantidad = cantidad;
     }
 
-    public String getNombreActividad() {
-        return nombreActividad;
+
+    public Long getId_persona() {
+        return id_persona;
     }
 
-    public void setNombreActividad(String nombreActividad) {
-        this.nombreActividad = nombreActividad;
+    public void setId_persona(Long id_persona) {
+        this.id_persona = id_persona;
+    }
+
+    public String getNombre_apellido() {
+        return nombre_apellido;
+    }
+
+    public void setNombre_apellido(String nombre_apellido) {
+        this.nombre_apellido = nombre_apellido;
+    }
+
+    public String getNombre_actividad() {
+        return nombre_actividad;
+    }
+
+    public void setNombre_actividad(String nombre_actividad) {
+        this.nombre_actividad = nombre_actividad;
     }
 
     public Double getCantidad() {
@@ -30,20 +46,5 @@ public class PersonaSinPagoDTO {
     public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
-
-    public Long getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public String getNombreApellido() {
-        return nombreApellido;
-    }
-
-    public void setNombreApellido(String nombreApellido) {
-        this.nombreApellido = nombreApellido;
-    }
 }
+

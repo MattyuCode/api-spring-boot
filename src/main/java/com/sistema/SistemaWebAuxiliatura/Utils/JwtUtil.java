@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
-    long  expirationTime = 10800000;
+    long expirationTime = 10800000;
     //long expirationTime = 10800000; // 3 horas en milisegundos
 
     public String extractUsername(String token) {
@@ -63,7 +63,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+expirationTime))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -71,7 +71,6 @@ public class JwtUtil {
         byte[] KeyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(KeyBytes);
     }
-
 
 
 }

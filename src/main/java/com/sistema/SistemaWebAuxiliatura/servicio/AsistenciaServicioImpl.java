@@ -12,6 +12,8 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +32,11 @@ public class AsistenciaServicioImpl implements AsistenciaServicio {
     public List<AsistenciaPendienteDTO> obtenerAsistenciasPendientes(Long idPersona) {
         return asistenciaRepositorio.findAsistenciasPendientes(idPersona);
     }
+
     @Autowired
     public void AsistenciaServicioImpl(AsistenciaRepositorio asistenciaRepositorio) {
         this.asistenciaRepositorio = asistenciaRepositorio;
     }
-
 
 
     @Override
@@ -66,8 +68,31 @@ public class AsistenciaServicioImpl implements AsistenciaServicio {
     }
 
     @Override
-    public Asistencia ModificarAsistencia(Asistencia asistencia) {
-        return this.asistenciaRepositorio.save(asistencia);
+    public Asistencia ModificarAsistencia(Map<String , Object> asistenciaData) {
+
+        Long idAsistencia = Long.valueOf(asistenciaData.get("idAsistencia").toString());
+        Asistencia asistenciaExiste = asistenciaRepositorio.findById(idAsistencia)
+                .orElseThrow(() -> new RuntimeException("Asistencia no encontrada"));
+
+        Long idPersona = Long.valueOf(asistenciaData.get("idPersona").toString());
+        Listadogeneralpersona persona = personsaRepo.findById(idPersona)
+                .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
+
+        Long tipoAsistencia = Long.valueOf(asistenciaData.get("tipoAsistencia").toString());
+        Actividadasistencia actividadasistencia = actividadAsistenciaRepositorio.findById(tipoAsistencia)
+                .orElseThrow(() -> new RuntimeException("Tipo asistencia no encontrado"));
+
+
+        asistenciaExiste.setIdPersona(persona);
+        asistenciaExiste.setTipoAsistencia(actividadasistencia);
+        asistenciaExiste.setDescripcion(asistenciaData.get("descripcion").toString());
+        asistenciaExiste.setIdUsuarioRegistro(Long.valueOf(asistenciaData.get("idUsuarioRegistro").toString()));
+        asistenciaExiste.setIdUsuarioModifica(Long.valueOf(asistenciaData.get("idUsuarioModifica").toString()));
+
+        asistenciaExiste.setFechaModificado(LocalDateTime.now());
+
+
+        return asistenciaRepositorio.save(asistenciaExiste);
     }
 
     @Override
