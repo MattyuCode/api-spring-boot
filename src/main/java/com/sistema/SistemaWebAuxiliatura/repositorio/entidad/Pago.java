@@ -25,7 +25,6 @@ public class Pago {
     private Listadogeneralpersona idPersona;
 
 
-
     @ManyToOne
     @JoinColumn(name = "id_tipo_pago", referencedColumnName = "id_actividad_pago")
     private Actividadpago idTipoPago;
@@ -35,30 +34,18 @@ public class Pago {
     @Nullable
     private Long idUsuarioRegistro;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date fechaRegistro;
+    private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     @Nullable
     private Long idUsuarioModifica;
     @Nullable
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime fechaModificado;
+    private LocalDateTime fechaModificado = LocalDateTime.now();
 
-
-
-    /*public Pago( long idPago, long idPersona, Double cantidad_Q, long idTipoPago, String descripcion, long idUsuarioRegistro, Long idUsuarioModifica) {
-        this.idPago = idPago;
-        this.idPersona = idPersona;
-        this.cantidad_Q = cantidad_Q;
-        this.idTipoPago = idTipoPago;
-        this.descripcion = descripcion;
-        this.idUsuarioRegistro = idUsuarioRegistro;
-        this.fechaRegistro = fechaRegistro;
-        this.idUsuarioModifica = idUsuarioModifica;
-        this.fechaModificado = fechaModificado;
-    }*/
 
     public Pago() {
-
+        this.fechaRegistro = LocalDateTime.now();
+        this.fechaModificado = LocalDateTime.now();
     }
 
     public Long getIdPago() {
@@ -102,11 +89,11 @@ public class Pago {
         this.idUsuarioRegistro = idUsuarioRegistro;
     }
 
-    public Date getFechaRegistro() {
+    public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
 
     }
